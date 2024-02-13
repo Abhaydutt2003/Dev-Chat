@@ -1,5 +1,14 @@
+import { BrowserRouter } from 'react-router-dom';
+import Router from './routes';
+
+
+
 const App = ()=>{
-  return <h1>Starting the project</h1>
+  return(
+    <BrowserRouter>
+    <Router></Router>
+    </BrowserRouter>
+  )
 }
 
 export default App;
