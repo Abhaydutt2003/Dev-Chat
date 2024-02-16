@@ -1,4 +1,5 @@
 //very good way to write code 
+//this way you make sure to make less mistakes, and actually makes easier to make new routes
 
 function path(root, sublink) {
   return `${root}${sublink}`;
