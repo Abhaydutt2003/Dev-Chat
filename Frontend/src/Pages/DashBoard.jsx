@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom";
+import { SideBar } from "../Components";
 
 
 
@@ -6,7 +7,8 @@ import { Outlet } from "react-router-dom";
 const DashBoard = ()=>{
     return(
         <>
-        <h1>DashBord</h1>
+        <SideBar></SideBar>
+        <h1 className=" underline">DashBord</h1>
         <Outlet></Outlet>
         </>
     )

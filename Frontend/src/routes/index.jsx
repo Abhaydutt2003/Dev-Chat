@@ -4,6 +4,8 @@ import { ErrorElement, GeneralApp } from "../Components";
 import { PATH_DASHBOARD, allPaths} from "./paths";
 import { Navigate, createBrowserRouter } from "react-router-dom";
 
+//todo implement lazy loading
+
 const router = createBrowserRouter([
   {
     path: PATH_DASHBOARD.root,
