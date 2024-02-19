@@ -1,11 +1,25 @@
 import SidebarButton from "./SidebarButton";
 import ThemeToggle from "./ThemeToggle";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import React from "react";
-import { SidebarButtonInfo } from "../data";
+import { SidebarButtonInfo, themes } from "../data";
 
 const SideBar = () => {
   const [selected, setSelected] = useState(1);
+  //logic to handle theme change, will shift to redux later
+  const getThemeFromLocalStorage = () => {
+    return localStorage.getItem("current-theme") || themes.light;
+  };
+  const [theme, setTheme] = useState(getThemeFromLocalStorage());
+  const handleToggle = () => {
+    const { light, dark } = themes;
+    const newTheme = theme === light ? dark : light;
+    setTheme(newTheme);
+  };
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("current-theme", theme);
+  }, [theme]);
   return (
     <>
       <div className=" flex items-center  justify-between flex-col shadow-lg h-screen w-32 ">
@@ -40,7 +54,7 @@ const SideBar = () => {
           })}
         </div>
         <div className="flex items-center flex-col">
-          <ThemeToggle></ThemeToggle>
+          <ThemeToggle handleToggle = {handleToggle}></ThemeToggle>
           <div className="avatar mb-12 mt-12">
             <div className=" w-11 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
               <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />

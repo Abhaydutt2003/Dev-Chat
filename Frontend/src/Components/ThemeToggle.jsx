@@ -1,5 +1,5 @@
-const ThemeToggle = () => {
-  return <label className="flex cursor-pointer gap-2">
+const ThemeToggle = ({handleToggle}) => {
+  return <label className="flex cursor-pointer gap-2" onClick={handleToggle}>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="20"

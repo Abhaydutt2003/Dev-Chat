@@ -47,3 +47,9 @@ export let SidebarButtonInfo = [
     logo: SettingLogo,
   },
 ];
+
+//all the themes that will be used in the project
+export let themes = {
+  light:'retro',
+  dark:'forest'
+}
