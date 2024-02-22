@@ -43,7 +43,7 @@ export let SidebarButtonInfo = [
     width: "w-12",
     logoHeight: "24px",
     logoWidth: "24px",
-    mt: "mt-7",
+    mt: "mt-5",
     logo: SettingLogo,
   },
 ];
@@ -51,5 +51,5 @@ export let SidebarButtonInfo = [
 //all the themes that will be used in the project
 export let themes = {
   light:'retro',
-  dark:'forest'
+  dark:'coffee'
 }
