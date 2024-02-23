@@ -2,9 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-
-@layer components{
-    #hideScroll ::-webkit-scrollbar{
-        display: none;
-    }
+.noScrollBar::-webkit-scrollbar {
+  /* background: transparent; */
+  display: none;
 }
+/* the above code removes the the ugly scrollbar, but the functionality still remains
+Just give the className to the component and that compnent will not have the scrollbar
+*/
+
+/* ::-webkit-scrollbar-thumb{
+    background: lightgray;
+    border-radius: 10px;
+} */

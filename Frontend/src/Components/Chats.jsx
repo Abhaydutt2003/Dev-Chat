@@ -17,8 +17,8 @@ const Chats = () => {
   });
   return (
     <div
-      className=" w-96 h-screen bg-base-200 overflow-hidden hover:overflow-auto"
-      style={{ boxShadow: "4px 0px 4px -4px rgba(0, 0, 0, 0.25)"}}
+      className=" h-screen w-[30%] bg-base-200 overflow-auto noScrollBar"
+      style={{ boxShadow: "4px 0px 4px -4px rgba(0, 0, 0, 0.25)" }}
     >
       <div className="flex justify-between mt-8 mx-7">
         <span className=" text-3xl font-extrabold">Chats</span>
@@ -40,7 +40,7 @@ const Chats = () => {
       {/* pinned and all chats */}
       <span className=" text-base font-bold ml-9 ">Pinned</span>
       <div className="flex flex-col">
-        <div className="flex flex-col ml-9 mt-4 gap-4">
+        <div className="flex flex-col ml-9 mt-4 gap-4 ">
           {pinned.map((info, index) => {
             return (
               <ChatBox
@@ -54,8 +54,8 @@ const Chats = () => {
               ></ChatBox>
             );
           })}
-           <span className=" text-base font-bold mt-2">All Chats</span>
-           {allChats.map((info, index) => {
+          <span className=" text-base font-bold mt-2">All Chats</span>
+          {allChats.map((info, index) => {
             return (
               <ChatBox
                 key={index}
@@ -70,7 +70,7 @@ const Chats = () => {
           })}
         </div>
       </div>
-      </div>
+    </div>
   );
 };
 
