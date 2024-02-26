@@ -10,7 +10,6 @@ export default {
     themes: [
       'retro',
       'coffee',
-      'coffee'
     ],
   },
 }

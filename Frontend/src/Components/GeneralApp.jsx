@@ -1,4 +1,5 @@
 import Chats from "./Chats";
+import Messages from "./Messages";
 import ProfileBar from "./ProfileBar";
 import UserInput from "./UserInput";
 
@@ -8,6 +9,7 @@ const GeneralApp = ()=>{
         <Chats></Chats>
         <div className=" w-[70%] h-screen flex flex-col justify-between items-center">
         <ProfileBar></ProfileBar>
+        <Messages></Messages>
         <UserInput></UserInput>
         </div>
         </div>
