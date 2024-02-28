@@ -1,4 +1,4 @@
-import { Chat_History } from "../fake_data";
+import { Chat_History } from "../../fake_data";
 import SingleMessage from "./SingleMessage";
 
 const Messages = () => {

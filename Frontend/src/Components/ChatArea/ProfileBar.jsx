@@ -7,12 +7,17 @@ const ProfileBar = () => {
   return (
     <div className=" bg-accent h-20 w-[100%] px-8 pr-6 flex justify-between">
       <div className="flex gap-4 mt-4">
-        <div> 
-          <div className="avatar online">
-            <div className=" w-12 rounded-full">
-              <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+        <div>
+          <label
+            htmlFor="my-drawer-4"
+            className=" drawer-button cursor-pointer"
+          >
+            <div className="avatar online ">
+              <div className=" w-12 rounded-full">
+                <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+              </div>
             </div>
-          </div>
+          </label>
         </div>
         <div className="flex flex-col">
           <span className=" text-accent-content font-extrabold">

@@ -50,6 +50,28 @@ export let SidebarButtonInfo = [
 
 //all the themes that will be used in the project
 export let themes = {
-  light:'retro',
-  dark:'coffee'
-}
+  light: "retro",
+  dark: "coffee",
+};
+
+// //all the options that will available to the user
+// export const Message_options = [
+//   {
+//     title: "Reply",
+//   },
+//   {
+//     title: "React to message",
+//   },
+//   {
+//     title: "Forward message",
+//   },
+//   {
+//     title: "Star message",
+//   },
+//   {
+//     title: "Report",
+//   },
+//   {
+//     title: "Delete Message",
+//   },
+// ];

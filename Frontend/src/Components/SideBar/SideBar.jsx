@@ -1,8 +1,8 @@
 import SidebarButton from "./SidebarButton";
 import ThemeToggle from "./ThemeToggle";
 import React from "react";
-import { SidebarButtonInfo } from "../data";
-import { toggleTheme, handleSideBar } from "../features/user/userSlice";
+import { SidebarButtonInfo } from "../../data";
+import { toggleTheme, handleSideBar } from "../../features/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const SideBar = () => {

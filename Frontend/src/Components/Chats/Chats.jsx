@@ -1,7 +1,7 @@
-import CircleLogo from "../assets/circle.svg";
-import ArchiveLogo from "../assets/archive.svg";
-import SearchInput from "./SearchInput";
-import { ChatList } from "../fake_data";
+import CircleLogo from "../../assets/circle.svg";
+import ArchiveLogo from "../../assets/archive.svg";
+import SearchInput from "../ChatArea/SearchInput";
+import { ChatList } from "../../fake_data";
 import ChatBox from "./ChatBox";
 
 const Chats = () => {

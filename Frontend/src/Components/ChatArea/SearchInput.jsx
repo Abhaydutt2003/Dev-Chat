@@ -1,4 +1,4 @@
-import SearchLogo from "../assets/search.svg";
+import SearchLogo from "../../assets/search.svg";
 
 const SearchInput = () => {
   return (
