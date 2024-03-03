@@ -5,7 +5,7 @@ import { BsChevronDown } from "react-icons/bs";
 
 const ProfileBar = () => {
   return (
-    <div className=" bg-accent h-20 w-[100%] px-8 pr-6 flex justify-between">
+    <div className=" bg-base-300 h-20 w-[100%] px-8 pr-6 flex justify-between">
       <div className="flex gap-4 mt-4">
         <div>
           <label
@@ -20,19 +20,19 @@ const ProfileBar = () => {
           </label>
         </div>
         <div className="flex flex-col">
-          <span className=" text-accent-content font-extrabold">
+          <span className=" text-base-content font-extrabold">
             Pink Panda
           </span>
-          <span className=" text-accent-content font-semibold">Online</span>
+          <span className=" text-base-content font-semibold">Online</span>
         </div>
       </div>
       {/* All the icons towards the right */}
       <div className=" md:hidden lg:flex items-center">
-        <IoVideocamOutline className=" w-6 h-6 mr-6 text-accent-content"></IoVideocamOutline>
-        <IoCallOutline className=" w-6 h-6 mr-6 text-accent-content"></IoCallOutline>
-        <IoSearchCircleOutline className=" w-6 h-6 text-accent-content"></IoSearchCircleOutline>
+        <IoVideocamOutline className=" w-6 h-6 mr-6 text-base-content"></IoVideocamOutline>
+        <IoCallOutline className=" w-6 h-6 mr-6 text-base-content"></IoCallOutline>
+        <IoSearchCircleOutline className=" w-6 h-6 text-base-content"></IoSearchCircleOutline>
         <div className=" divider divider-horizontal "></div>
-        <BsChevronDown className=" w-6 h-6 text-accent-content"></BsChevronDown>
+        <BsChevronDown className=" w-6 h-6 text-base-content"></BsChevronDown>
       </div>
     </div>
   );

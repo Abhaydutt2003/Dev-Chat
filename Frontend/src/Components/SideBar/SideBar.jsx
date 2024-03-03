@@ -21,7 +21,7 @@ const SideBar = () => {
                 <SidebarButton
                   bg={
                     index == 0
-                      ? "bg-secondary"
+                      ? "bg-accent"
                       : selected == index
                       ? "bg-primary"
                       : ""

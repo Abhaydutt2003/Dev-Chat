@@ -50,7 +50,7 @@ export let SidebarButtonInfo = [
 
 //all the themes that will be used in the project
 export let themes = {
-  light: "retro",
+  light: "corporate",
   dark: "coffee",
 };
 

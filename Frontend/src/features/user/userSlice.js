@@ -9,6 +9,8 @@ const getThemeFromLocalStorage = () => {
 };
 
 
+
+
 const initialState = {
   user: "some random user",
   sideBarIndex: localStorage.getItem("sideBarIndex") || 1,
