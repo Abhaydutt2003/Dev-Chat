@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
+/* since using rems in the entire project,could easily change the root 
+font size here, to make the page responsive
+ */
+html{
+  font-size: 16px;
+}
+
+
 .noScrollBar::-webkit-scrollbar {
   /* background: transparent; */
   display: none;

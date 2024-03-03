@@ -1,5 +1,9 @@
 import { faker } from "@faker-js/faker";
 
+//all utility functions here
+
+
+
 /**
  *
  * @param {string} phoneNumber
@@ -23,5 +27,13 @@ let getDomain = (fullLink) => {
   let urlObject = new URL(fullLink);
   return urlObject.hostname;
 };
+
+
+// // to determine the type of document 
+// let determineType = ()=>{
+
+// }
+
+
 
 export { getIndian, getFakeImage, getDomain };
