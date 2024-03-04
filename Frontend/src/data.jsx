@@ -54,6 +54,15 @@ export let themes = {
   dark: "coffee",
 };
 
+export const rightBarDisplays = {
+  CONTACT_INFO: "contactinfo",
+  MEDIA_LINKS: {
+    MEDIA:'media',
+    LINKS : 'links',
+    DOCS : "docs"
+  }
+};
+
 // //all the options that will available to the user
 // export const Message_options = [
 //   {

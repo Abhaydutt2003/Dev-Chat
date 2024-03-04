@@ -3,7 +3,6 @@ import MediaContent from "./MediaContent";
 import LinksContent from "./LinksContent";
 import DocsContent from "./DocsContent";
 
-//TODO in the redux store , make sure to store that which page the user is actually viewing,
 const MediaLinksDocs = () => {
   return (
     <>
@@ -23,10 +22,6 @@ const MediaLinksDocs = () => {
             Docs
           </a>
         </div>
-        {/* <div className="divider divider-start">27th Oct 22</div> */}
-        {/* <MediaContent></MediaContent> */}
-        {/* <LinksContent></LinksContent> */}
-        <DocsContent></DocsContent>
       </div>
     </>
   );

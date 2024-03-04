@@ -1,6 +1,7 @@
 import { IoMdCheckmark } from "react-icons/io";
 import { RxCross1 } from "react-icons/rx";
 
+
 const AlertModal = ({ type }) => {
   let text =
     type == "my_modal_1" ? "Block the account ?" : "Delete all chats ?";

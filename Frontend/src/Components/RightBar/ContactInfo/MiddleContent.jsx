@@ -1,26 +1,33 @@
 //TODO break the entire component in parts,
 //and implement caching or use react query to prevent un necessary api calls
-
 import { IoChevronForward } from "react-icons/io5";
-import { getFakeImage } from "../../util";
+import { getFakeImage } from "../../../util";
 import { IoStar } from "react-icons/io5";
 import { IoMdNotificationsOff } from "react-icons/io";
-
 import { AiOutlineDelete } from "react-icons/ai";
 import { MdOutlineAppBlocking } from "react-icons/md";
 import AlertModal from "./AlertModal";
+import { useDispatch } from "react-redux";
+import { shiftDisplay } from "../../../features/RightBar/rightBarSlice";
+import { rightBarDisplays } from "../../../data";
 
 const MiddleContent = () => {
+  //handle the redux store to go to different displays
+  const dispatch = useDispatch();
+  const handleClick1 = ()=>{
+    dispatch(shiftDisplay(rightBarDisplays.MEDIA_LINKS.MEDIA));
+  }
+
   return (
     <div className="flex flex-col h-full w-full items-center">
       <div className="divider"></div>
       <div className="flex flex-row w-full justify-between items-center">
         <div>Media, links and docs</div>
         <div className="flex flex-row gap-2">
-          <div className="btn btn-ghost">
+          <button className="btn btn-ghost" onClick={handleClick1}>
             201
             <IoChevronForward></IoChevronForward>
-          </div>
+          </button>
         </div>
       </div>
       <div className=" mt-5 mx-4 w-[90%] carousel carousel-center p-2 space-x-3 bg-neutral rounded-box ">

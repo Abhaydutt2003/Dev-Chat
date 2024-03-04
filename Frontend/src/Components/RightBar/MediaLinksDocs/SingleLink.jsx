@@ -1,5 +1,5 @@
 import { FaLink } from "react-icons/fa6";
-import { getDomain } from "../../util";
+import { getDomain } from "../../../util";
 
 const SingleLink = ({ fullLink }) => {
   let domain = getDomain(fullLink);

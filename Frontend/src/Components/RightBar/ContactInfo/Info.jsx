@@ -1,4 +1,4 @@
-import { getIndian } from "../../util";
+import { getIndian } from "../../../util";
 import { IoVideocamOutline } from "react-icons/io5";
 import { IoCallOutline } from "react-icons/io5";
 
