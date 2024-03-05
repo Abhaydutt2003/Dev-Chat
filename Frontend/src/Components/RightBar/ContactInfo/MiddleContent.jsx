@@ -31,7 +31,7 @@ const MiddleContent = () => {
         </div>
       </div>
       <div className=" mt-5 mx-4 w-[90%] carousel carousel-center p-2 space-x-3 bg-neutral rounded-box ">
-        <div className="carousel-item w-2/5">
+        {/* <div className="carousel-item w-2/5">
           <img src={getFakeImage()} className="rounded-box" />
         </div>
         <div className="carousel-item w-2/5">
@@ -51,7 +51,7 @@ const MiddleContent = () => {
         </div>
         <div className="carousel-item w-2/5">
           <img src={getFakeImage()} className="rounded-box" />
-        </div>
+        </div> */}
       </div>
       <div className="divider"></div>
       {/* Starred messages */}

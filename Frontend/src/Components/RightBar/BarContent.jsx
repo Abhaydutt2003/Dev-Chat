@@ -1,7 +1,7 @@
 //import ContactInfo from "./ContactInfo";
 import { rightBarDisplays } from "../../data";
 import MediaLinksDocs from "./MediaLinksDocs/MediaLinksDocs";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import ContactInfo from "./ContactInfo/ContactInfo";
 
 const BarContent = ({ children }) => {
