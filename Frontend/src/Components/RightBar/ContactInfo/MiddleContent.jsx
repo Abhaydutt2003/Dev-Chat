@@ -1,7 +1,13 @@
 //TODO break the entire component in parts,
 //and implement caching or use react query to prevent un necessary api calls
+
+//import { getFakeImage } from "../../../util";
+//cannot currently get the images to load as it is making the application
+//severly laggy, implement lazy loading of images, so as to improve the performace
+
+
+
 import { IoChevronForward } from "react-icons/io5";
-import { getFakeImage } from "../../../util";
 import { IoStar } from "react-icons/io5";
 import { IoMdNotificationsOff } from "react-icons/io";
 import { AiOutlineDelete } from "react-icons/ai";
@@ -12,11 +18,10 @@ import { shiftDisplay } from "../../../features/RightBar/rightBarSlice";
 import { rightBarDisplays } from "../../../data";
 
 const MiddleContent = () => {
+  const {STARRED_MESSAGES} = rightBarDisplays;
+  const {MEDIA}  = rightBarDisplays.MEDIA_LINKS;
   //handle the redux store to go to different displays
   const dispatch = useDispatch();
-  const handleClick1 = ()=>{
-    dispatch(shiftDisplay(rightBarDisplays.MEDIA_LINKS.MEDIA));
-  }
 
   return (
     <div className="flex flex-col h-full w-full items-center">
@@ -24,7 +29,7 @@ const MiddleContent = () => {
       <div className="flex flex-row w-full justify-between items-center">
         <div>Media, links and docs</div>
         <div className="flex flex-row gap-2">
-          <button className="btn btn-ghost" onClick={handleClick1}>
+          <button className="btn btn-ghost" onClick={()=>dispatch(shiftDisplay(MEDIA))}>
             201
             <IoChevronForward></IoChevronForward>
           </button>
@@ -60,7 +65,10 @@ const MiddleContent = () => {
           <IoStar className=" w-5 h-5 text-base-content"></IoStar>
           <div>Starred Messages</div>
         </div>
-        <IoChevronForward className="w-6 h-6 text-base-content"></IoChevronForward>
+        <button className="btn btn-ghost" onClick={()=>dispatch(shiftDisplay(STARRED_MESSAGES))}>
+            13
+            <IoChevronForward></IoChevronForward>
+          </button>
       </div>
       <div className="divider"></div>
       {/* mute notifications */}
@@ -78,7 +86,7 @@ const MiddleContent = () => {
         <div className="flex flex-row items-center w-full">
           <div className="avatar ml-10">
             <div className=" w-20 h-20 rounded-full">
-              <img src={getFakeImage()} />
+              <img alt="Some random Image" />
             </div>
           </div>
           <div className=" flex flex-col gap-1 ml-9">

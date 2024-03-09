@@ -60,7 +60,8 @@ export const rightBarDisplays = {
     MEDIA:'media',
     LINKS : 'links',
     DOCS : "docs"
-  }
+  },
+  STARRED_MESSAGES:'starredmessages'
 };
 
 // //all the options that will available to the user
