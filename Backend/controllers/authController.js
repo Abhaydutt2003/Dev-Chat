@@ -28,6 +28,15 @@ const handleLogin = async (req, res, next) => {
       process.env.ACCESS_TOKEN_SECRET,
       { expiresIn: "60s" }
     );
+    //the expiration of the refreshToken determines when the user will have to login again , as once the refreshToken expires, the user cannot get a new accessToken
+    const refreshToken = jwt.sign(
+      {userId: foundUser._id,},
+      process.env.REFRESH_TOKEN_SECRET,
+      {expiresIn:'1d'}
+    );
+    //save refreshToken in the foundUser
+    foundUser.refreshToken = refreshToken;
+    await foundUser.save();
     return res.status(200).json({
       status: "success",
       message: "Logged in successfully",
@@ -36,4 +45,4 @@ const handleLogin = async (req, res, next) => {
   }
 };
 
-module.exports = { handleLogin };
+module.exports = handleLogin;
