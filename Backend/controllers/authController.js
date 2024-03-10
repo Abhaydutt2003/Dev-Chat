@@ -10,7 +10,9 @@ const handleLogin = async (req, res, next) => {
       message: "Both email and password are required",
     });
   }
-  const foundUser = await User.findOne({ email: email }).select("+pwd").exec();
+  const foundUser = await User.findOne({ email: email })
+    .select("+password")
+    .exec();
   if (!foundUser)
     return res.status(401).json({ status: "error", message: "User not found" });
   //evlauate the input password
@@ -30,13 +32,19 @@ const handleLogin = async (req, res, next) => {
     );
     //the expiration of the refreshToken determines when the user will have to login again , as once the refreshToken expires, the user cannot get a new accessToken
     const refreshToken = jwt.sign(
-      {userId: foundUser._id,},
+      { email: foundUser.email },
       process.env.REFRESH_TOKEN_SECRET,
-      {expiresIn:'1d'}
+      { expiresIn: "1d" }
     );
-    //save refreshToken in the foundUser
+    //save refreshToken in the foundUser and set the cookie
     foundUser.refreshToken = refreshToken;
     await foundUser.save();
+    res.cookie("jwt", refreshToken, {
+      httpOnly: true,
+      maxAge: 24 * 60 * 60 * 1000,
+      sameSite: "none",
+      secure: true,
+    });
     return res.status(200).json({
       status: "success",
       message: "Logged in successfully",

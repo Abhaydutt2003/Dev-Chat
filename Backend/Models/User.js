@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcrypt = require('bcrypt');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
@@ -27,7 +28,7 @@ const userSchema = new Schema({
       message: (props) => `Email (${props.value}) is invalid`,
     },
   },
-  password: {
+  password: { 
     type: String,
   },
   passwordChangedAt: {
@@ -49,8 +50,25 @@ const userSchema = new Schema({
     type:Boolean,
     default:false,
   },
+  otp:{
+    type:Number
+  },
+  otpExpireTime:{
+    type:Date
+  },
   refreshToken:String
 });
+
+
+
+
+//before actully saving , this function will be called
+userSchema.pre('save',async function(next){
+  //run only if the otp is modified
+  if(!this.isModified("otp"))return next();
+  //HASH the otp
+  this.otp = await bcrypt.hash(this.otp,12);
+})
 
 
 
