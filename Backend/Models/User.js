@@ -31,6 +31,9 @@ const userSchema = new Schema({
   password: { 
     type: String,
   },
+  passwordConfirm: { 
+    type: String,
+  },
   passwordChangedAt: {
     type: Date,
   },
@@ -56,7 +59,9 @@ const userSchema = new Schema({
   otpExpireTime:{
     type:Date
   },
-  refreshToken:String
+  refreshToken:{
+    type:String
+  }
 });
 
 

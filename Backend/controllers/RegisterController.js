@@ -41,3 +41,7 @@ const handleNewUser = async (req, res, next) => {
 module.exports = handleNewUser;
 
 //validateModifiedOnly: true: Instructs Mongoose to only validate fields that have been changed in filteredBody, potentially improving performance.
+
+
+//Steps to SignUp
+// => register -> sendOtp -> verifyOtp

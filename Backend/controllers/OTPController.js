@@ -36,6 +36,9 @@ const verifyOtp = async (req, res, next) => {
       message: "Email is Invalid or the OTP has expired",
     });
   } else {
+
+    //TODO look into this part , should the user be redirected or logged in from here?
+
     //validate the OTP
     const match = await bcrypt.compare(otp, user.otp);
     if (!match) {
@@ -57,11 +60,11 @@ const verifyOtp = async (req, res, next) => {
       );
       //the expiration of the refreshToken determines when the user will have to login again , as once the refreshToken expires, the user cannot get a new accessToken
       const refreshToken = jwt.sign(
-        { email: foundUser.email },
+        { userId:foundUser._id },
         process.env.REFRESH_TOKEN_SECRET,
         { expiresIn: "1d" }
       );
-      //save refreshToken in the foundUser ans set the cookie
+      //save refreshToken in the foundUser and set the cookie
       foundUser.refreshToken = refreshToken;
       await user.save({ new: true, validateModifiedOnly: true });
       res.cookie("jwt", refreshToken, {

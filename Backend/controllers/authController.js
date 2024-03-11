@@ -32,7 +32,7 @@ const handleLogin = async (req, res, next) => {
     );
     //the expiration of the refreshToken determines when the user will have to login again , as once the refreshToken expires, the user cannot get a new accessToken
     const refreshToken = jwt.sign(
-      { email: foundUser.email },
+      { userId:foundUser._id },
       process.env.REFRESH_TOKEN_SECRET,
       { expiresIn: "1d" }
     );
