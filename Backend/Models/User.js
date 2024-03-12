@@ -30,7 +30,9 @@ const userSchema = new Schema({
   },
   password: { 
     type: String,
+    select:false
   },
+  //TODO REMOVE THIS
   passwordConfirm: { 
     type: String,
   },
@@ -63,7 +65,6 @@ const userSchema = new Schema({
     type:String
   }
 });
-
 
 
 
