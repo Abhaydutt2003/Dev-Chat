@@ -1,47 +1,69 @@
+const otpGenerator = require("otp-generator");
 const User = require("../Models/User");
-const filterObj = require("../utils/filterObj");
+const bcrypt = require("bcrypt");
+const OTP = require("../Models/OTP");
+const emailValidator = require("../utils/validateEmail");
+const {mailOtp} = require('../utils/sendEmail');
 
-//Register new user
-const handleNewUser = async (req, res, next) => {
-  const { firstName, lastName, email, pwd } = req.body;
-  if (!firstName || !lastName || !email || !pwd) {
-    return res.status(400).json({ message: "Please provide all the fields" });
-  }
-  const filteredBody = filterObj(
-    req.body,
-    "firstName",
-    "lastName",
-    "pwd",
-    "email"
-  );
-  //check if a verified user with the email exists
-  const exisistingUser = await User.findOne({ email: email });
-  if (exisistingUser && exisistingUser.verified) {
-    return res.status(400).json({
-      status: "error",
-      message: "Email is already in use",
-    });
-  } else if (exisistingUser) {
-    //HANDLE_WITH_CARE
-    await User.findByIdAndUpdate({ email: email }, filteredBody, {
-      new: true,
-      validateModifiedOnly: true,
-    });
-    req.userId = exisistingUser._id;
-    next();
-  } else {
-    //first time
-    const newUser = await User.create(filteredBody);
-    //generate OTP
-    req.userId = newUser._id;
-    next();
-  }
+
+const sendOtp = async (req, res) => {
+  const userId = req.userId;
+  //the newOtp will be sent to the user using a email ,
+  //after that we will store the otp using bcypt in the Schema
+  const newOtp = otpGenerator.generate(6, {
+    lowerCaseAlphabets: false,
+    upperCaseAlphabets: false,
+    specialChars: false,
+  });
+  const user = await User.findById(userId);
+  //send the user the OTP
+  await mailOtp(user.firstName,user.email,newOtp);
+  const hashedOtp = await bcrypt.hash(newOtp, 12);
+  console.log(typeof hashedOtp);
+  await OTP.create({
+    otp: hashedOtp,
+    userId: userId, 
+    expiresAt:Date.now(),
+  });
+  res.status(200).json({
+    status: "success",
+    messsage: "OTP sent to provided email",
+  });
 };
 
-module.exports = handleNewUser;
+const verifyOtp = async (req, res) => {
+  const { email, otp } = req.body;
+  if (!emailValidator(email))
+    return res.status(400).json({ status: "error", messsage: "Invalid email" });
+  const user = await User.findOne({
+    email: email,
+  });
+  if (!user)
+    return res
+      .status(400)
+      .json({ status: "error", messsage: "User does not exist" });
+  //find the OTP
+  const foundOTP = OTP.findOne({ userId: user._id });
+  if (!foundOTP)
+    return res
+      .status(400)
+      .json({ status: "error", messsage: "OTP invalid or expired" });
+  //validate the OTP
+  bcrypt.compare(otp, foundOTP.otp, (err) => {
+    if (err) {
+      return res
+        .status(400)
+        .json({ status: "error", message: "OTP is incorrect" });
+    } else {
+      //** verify the user and on the frontend , redirect the user to login
+      user.verified = true;
+      return res
+        .status(200)
+        .json({ status: "success", message: "User verified successfully,redirect to login" });
+    }
+  });
+};
 
-//validateModifiedOnly: true: Instructs Mongoose to only validate fields that have been changed in filteredBody, potentially improving performance.
+module.exports = {verifyOtp,sendOtp};
 
 
-//Steps to SignUp
-// => register -> sendOtp -> verifyOtp

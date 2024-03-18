@@ -1,4 +1,5 @@
 const express = require("express");
+const routes = require('./routes');
 const morgan = require("morgan");
 const rateLimit = require("express-rate-limit");
 const rateLimitOptions = require("./config/rateLimitOptions");
@@ -8,7 +9,6 @@ const corsOptions = require("./config/corsOptions");
 const helmet = require("helmet");
 const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss");
-
 const app = express();
 app.use(cors(corsOptions));
 
@@ -26,6 +26,7 @@ const limiter = rateLimit(rateLimitOptions);
 //use the limiter on the route to protect
 app.use("/api", limiter);
 app.use(mongoSanitize());
+app.use(routes);
 // app.use(xss());
 
 module.exports = app;

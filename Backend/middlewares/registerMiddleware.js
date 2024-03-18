@@ -33,7 +33,7 @@ const registerMiddleware = async (req, res, next) => {
   } else if (existingUser) {
     //email is already there, just update any changed field
     //? CHECK IF THE METHOD BELOW WORKS
-    await User.findByIdAndUpdate({ email: email }, filteredBody, {
+    const newUser = await User.findOneAndUpdate({ email: email }, filteredBody, {
       new: true,
       runValidators: true,
     });

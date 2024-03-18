@@ -1,14 +1,14 @@
 const mongoose = require("mongoose");
-const bcrypt = require('bcrypt');
+//const bcrypt = require('bcrypt');
 const Schema = mongoose.Schema;
 
 
 const otpSchema = new Schema({
     userId:{
-        type:Number
+        type:Object,
     },
     otp:{
-        type:Number,
+        type:String,
     },
     "expiresAt":{
         type:Date,
@@ -16,6 +16,6 @@ const otpSchema = new Schema({
     }
 });
 
-//the expiresAt defines when the OTP will actually expire
+//the expiresAt defines when the OTP document will be automatically removed from the db
 
 module.exports = mongoose.model("OTP",otpSchema);

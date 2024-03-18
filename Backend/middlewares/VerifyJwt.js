@@ -1,16 +1,20 @@
 const jwt = require("jsonwebtoken");
-const User = require("../Models/User");
+//const User = require("../Models/User");
 require("dotenv").config(); //to use the env files in the project
 
 //this middleware will be used in the routes that we want to protect, (all the routes that deal with sensitive information)
 const verifyJwt = (req, res, next) => {
   const authHeader = req.headers.authorization || req.headers.Authorization;
   //check if there is no token
-  if (!authHeader?.startsWith("Bearer")) return res.sendStatus(401);
+  if (!authHeader?.startsWith("Bearer")){
+    return res.status(401).json({status:'error',message:'Unauthorized'})
+  };
   const token = authHeader.split(" ")[1];
   //verify the token
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, async (err, decoded) => {
-    if (err) return res.sendStatus(403);
+    if (err) {
+      res.status(403).json({status:'error',message:'Incorrect token'})
+    }
     req.userId = decoded.UserInfo.userId;
     req.jwtIssueTime = decoded.iat;
     next();
