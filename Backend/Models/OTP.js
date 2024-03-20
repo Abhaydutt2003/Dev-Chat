@@ -10,12 +10,13 @@ const otpSchema = new Schema({
     otp:{
         type:String,
     },
-    "expiresAt":{
+    createdAt:{
         type:Date,
-        expires: 10 * 60 * 1000//10 mins from now on
+        default:Date.now,
     }
 });
 
-//the expiresAt defines when the OTP document will be automatically removed from the db
+otpSchema.index({createdAt:1},{expireAfterSeconds:300});
+
 
 module.exports = mongoose.model("OTP",otpSchema);

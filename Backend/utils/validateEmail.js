@@ -4,6 +4,7 @@
  * @returns {Boolean}
  */
 const emailValidator = (email) => {
+  if (!email) return false;
   return String(email)
     .toLowerCase()
     .match(

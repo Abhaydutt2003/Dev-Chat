@@ -32,16 +32,9 @@ const mailOtp = async (userName,userEmail,userOTP) => {
   let emailContent = {
     body: {
       name: userName,
-      intro: "Enter the following OTP to register on DEV-CHAT",
+      intro: `Enter ${userOTP} to register at dev-chat`,
     },
-    action: {
-      instructions: "The OTP will expire in 10 mins",
-      button: {
-        color: "#DC4D2F",
-        text: userOTP,
-      },
-    },
-    outro: "If the OTP expires, please register again",
+    outro: "The otp will expire after 10 mins , please register again if the otp expires.",
   };
   let emailBody = mailGenerator.generate(emailContent);
   let message = {

@@ -1,53 +1,59 @@
 const User = require("../Models/User");
+const bcrypt = require("bcrypt");
 const filterObj = require("../utils/filterObj");
 const emailValidator = require("../utils/validateEmail");
 
-//next because this is a middleware
 const registerMiddleware = async (req, res, next) => {
-  const { firstName, lastName, email, pwd } = req.body;
-  if (!firstName || !lastName || !email || !pwd) {
+  const { firstName, lastName, email, password } = req.body;
+  //check if the user has provided all the feilds
+  if (!firstName || !lastName || !email || !password) {
     return res.status(400).json({ message: "Please provide all the fields" });
   }
-  const filteredBody = filterObj(
-    req.body,
-    "firstName",
-    "lastName",
-    "pwd",
-    "email"
-  );
-  //validate the email
-  const isValid = emailValidator(email);
-  if (!isValid) {
-    return res.status(400).json({
-      status: "error",
-      message: "Please enter a valid email",
-    });
+  //check if the email is valid
+  const validEmail = emailValidator(email);
+  if (!validEmail) {
+    return res
+      .status(400)
+      .json({ status: "error", message: "Please provide a correct email" });
   }
-  //check if a verified user with the email exists
+  //check if existing user
   const existingUser = await User.findOne({ email: email });
   if (existingUser && existingUser.verified) {
     return res.status(400).json({
       status: "error",
       message: "Email is already in use",
     });
-  } else if (existingUser) {
-    //email is already there, just update any changed field
-    //? CHECK IF THE METHOD BELOW WORKS
-    const newUser = await User.findOneAndUpdate({ email: email }, filteredBody, {
-      new: true,
-      runValidators: true,
-    });
-    req.userId  = newUser._id;
-    next();
   } else {
-    //first time
-    const newUser = await User.create(filteredBody);
-    req.userId  = newUser._id;
+    //hash the password
+    const salt = await bcrypt.genSalt(12);
+    const hashedPwd = await bcrypt.hash(password, salt);
+    req.body.password = hashedPwd;
+    const filteredBody = filterObj(
+      req.body,
+      "firstName",
+      "lastName",
+      "email",
+      "password"
+    );
+    if (existingUser) {
+      const updatedUser = await User.findOneAndUpdate(
+        { email: email },
+        filteredBody,
+        { new: true }
+      );
+      req.userId = updatedUser._id;
+    } else {
+      const newUser = await User.create(filteredBody);
+      req.userId = newUser._id;
+    }
     next();
   }
 };
 
 module.exports = registerMiddleware;
 
-//this middleware will check weather it is the first time that the user
-//is trying to signup to the website or not, ans will process accordingly
+// this middleware will check weather it is the first time that the user
+// is trying to signup to the website or not, and will process accordingly
+
+// do not need to check if there are same passwords in the db or not
+// passwords will be stored as hash , so very unlikely that the passwords will collide

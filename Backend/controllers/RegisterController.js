@@ -15,16 +15,22 @@ const sendOtp = async (req, res) => {
     upperCaseAlphabets: false,
     specialChars: false,
   });
+  //console.log(userId);
   const user = await User.findById(userId);
+  //console.log(user);
   //send the user the OTP
   await mailOtp(user.firstName,user.email,newOtp);
   const hashedOtp = await bcrypt.hash(newOtp, 12);
-  console.log(typeof hashedOtp);
-  await OTP.create({
-    otp: hashedOtp,
-    userId: userId, 
-    expiresAt:Date.now(),
-  });
+  //console.log(typeof hashedOtp);
+  //check weather a OTP already exsist with the userId
+  let otp = await OTP.findOne({userId:userId});
+  if(!otp){
+    await OTP.create({
+      otp: hashedOtp,
+      userId: userId, 
+      createdAt:Date.now()
+    });
+  }
   res.status(200).json({
     status: "success",
     messsage: "OTP sent to provided email",
@@ -43,13 +49,13 @@ const verifyOtp = async (req, res) => {
       .status(400)
       .json({ status: "error", messsage: "User does not exist" });
   //find the OTP
-  const foundOTP = OTP.findOne({ userId: user._id });
+  const foundOTP = await OTP.findOne({ userId: user._id });
   if (!foundOTP)
     return res
       .status(400)
       .json({ status: "error", messsage: "OTP invalid or expired" });
   //validate the OTP
-  bcrypt.compare(otp, foundOTP.otp, (err) => {
+  bcrypt.compare(otp, foundOTP.otp, async (err) => {
     if (err) {
       return res
         .status(400)
@@ -57,6 +63,7 @@ const verifyOtp = async (req, res) => {
     } else {
       //** verify the user and on the frontend , redirect the user to login
       user.verified = true;
+      await user.save();
       return res
         .status(200)
         .json({ status: "success", message: "User verified successfully,redirect to login" });
