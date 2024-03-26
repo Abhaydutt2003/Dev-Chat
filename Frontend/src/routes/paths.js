@@ -6,14 +6,23 @@ let path = (root,sublink)=>{
 
 export let allPaths = {
     ROOT : "/",
-    APP :'app'
+    APP :'/app',
+    AUTH:'auth',
+    LOGIN:'/login',
+    REGISTER:'/register',
+    VERIFY:'/verify'
 }
 
 
-export const PATH_DASHBOARD = {
+export const PATHS = {
     root:allPaths.ROOT,
     general:{
-        app:path(allPaths.ROOT,allPaths.APP)
+        app:allPaths.APP
+    },
+    auth:{
+        login:path(allPaths.AUTH,allPaths.LOGIN),
+        register:path(allPaths.AUTH,allPaths.REGISTER),
+        verify:path(allPaths.AUTH,allPaths.VERIFY),
     }
 }
 

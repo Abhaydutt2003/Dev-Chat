@@ -1,20 +1,25 @@
 //this file will export the router, it will have all the logic
-import { Dashboard, Page404 } from "../Pages";
+import { Dashboard, Page404,Auth } from "../Pages";
 import { ErrorElement, GeneralApp } from "../Components";
-import { PATH_DASHBOARD, allPaths} from "./paths";
+import { PATHS, allPaths} from "./paths";
 import { Navigate, createBrowserRouter } from "react-router-dom";
 
 //todo implement lazy loading
 
 const router = createBrowserRouter([
   {
-    path: PATH_DASHBOARD.root,
+    path:allPaths.AUTH,
+    element:<Auth></Auth>,
+    
+  },
+  {
+    path: PATHS.root,
     element: <Dashboard></Dashboard>,
     errorElement: <ErrorElement></ErrorElement>,
     children: [
       {
         index: true,
-        element: <Navigate to={PATH_DASHBOARD.general.app} replace />,
+        element: <Navigate to={PATHS.general.app} replace />,
       },
       {
         path: allPaths.APP,
