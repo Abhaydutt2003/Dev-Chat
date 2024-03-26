@@ -36,6 +36,7 @@ const registerMiddleware = async (req, res, next) => {
       "password"
     );
     if (existingUser) {
+      filteredBody.passwordChangedAt = Date.now();
       const updatedUser = await User.findOneAndUpdate(
         { email: email },
         filteredBody,

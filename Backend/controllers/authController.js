@@ -54,6 +54,7 @@ const handleLogin = async (req, res, next) => {
     sameSite: "none",
     secure: true,
   });
+  //TODO SET SECURE : TRUE WHILE USING WITH CHROME
   return res.status(200).json({
     status: "success",
     message: "Logged in successfully",

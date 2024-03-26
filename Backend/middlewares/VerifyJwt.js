@@ -13,7 +13,7 @@ const verifyJwt = (req, res, next) => {
   //verify the token
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, async (err, decoded) => {
     if (err) {
-      res.status(403).json({status:'error',message:'Incorrect token'})
+      return res.status(403).json({status:'error',message:'Incorrect token'})
     }
     req.userId = decoded.UserInfo.userId;
     req.jwtIssueTime = decoded.iat;

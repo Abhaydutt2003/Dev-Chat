@@ -18,6 +18,10 @@ const userSchema = new Schema({
     type: String,
     required: [true, "Email is required"], //required specifies that the field is mandatory , and cannot be left empty when a document is created
   },
+  about: {
+    type: "String",
+    default: "Hi there i am using DEV-CHAT",
+  },
   password: {
     type: String,
     select: false,

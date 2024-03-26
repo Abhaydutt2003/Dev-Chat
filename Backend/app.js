@@ -1,4 +1,5 @@
 const express = require("express");
+const cookieParser = require("cookie-parser");
 const routes = require('./routes');
 const morgan = require("morgan");
 const rateLimit = require("express-rate-limit");
@@ -9,8 +10,12 @@ const corsOptions = require("./config/corsOptions");
 const helmet = require("helmet");
 const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss");
+
+
 const app = express();
 app.use(cors(corsOptions));
+app.use(cookieParser());//populates the req,res with a object named cookie,simplifies cookie handling
+
 
 app.use(express.json({ limit: "10kb", extended: true }));
 //TODO change the limit in production
