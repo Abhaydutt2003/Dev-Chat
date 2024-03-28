@@ -8,3 +8,6 @@ const ErrorElement = ()=>{
 
 
 export default ErrorElement;
+
+
+//component to display any error.
